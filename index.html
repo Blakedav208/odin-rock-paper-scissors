@@ -1,10 +1,28 @@
 <!DOCTYPE html>
 <html>
 
-<head></head>
+<head>
+    <title>Rock Paper Scissors</title>
+    <link rel="stylesheet" href="style.css">
+</head>
 
 <body>
+    <div class= "playerChoice">
+        <button class= "rock">ROCK</button>
+        <button class= "paper">PAPER</button>
+        <button class= "scissors">SCISSORS</button>
+    </div>
+
     <script>
+        const rockBtn = document.querySelector('.rock');
+        rockBtn.addEventListener('click', (e) => {
+            let playerSelection = "rock";
+            return playerSelection;
+        });
+
+        const paperBtn = document.querySelector('.paper');
+        const scissorsBtn = document.querySelector('.scissors');
+
         function computerPlay() {
             let random = Math.floor(Math.random() * Math.floor(3));
             switch (random) {
@@ -68,8 +86,7 @@
 
         
 
-        game();
-
+        //game();
 
 
     </script>
