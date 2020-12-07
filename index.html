@@ -15,13 +15,29 @@
 
     <div class= "displayResults">
         <h1>Results</h1>
-        <h3>Player</h3>
-        <h3>CPU</h3>
+        <div class = "playerDisplay">
+            <h3>Player</h3>
+            <p class= "playerScore"></p>
+        </div>
+        
+        <div class= "cpuDisplay">
+            <h3>CPU</h3>
+            <p class= "cpuScore"></p>
+        </div>
+        
+
+        
+        
     </div>
 
     <script>
-        const div = document.querySelector('.displayResults');
+        //JS for changing the DOM
+        const div = document.querySelector('.playerChoice');
         const paragraph = document.createElement('p');
+        const playerScore = document.querySelector('.playerScore');
+        const cpuScore = document.querySelector('.cpuScore');
+        const newPlayerScore = document.createElement('p');
+        const newCpuScore = document.createElement('p');
         
         const rockBtn = document.querySelector('.rock');
         rockBtn.addEventListener('click', (e) => {
@@ -29,6 +45,11 @@
             let computerSelection = computerPlay();
             paragraph.textContent =  playRound(playerSelection, computerSelection);
             div.appendChild(paragraph);
+            newPlayerScore.textContent = `${playerCount}`;
+            newCpuScore.textContent = `${cpuCount}`;
+            playerScore.appendChild(newPlayerScore);
+            cpuScore.appendChild(newCpuScore);
+            
         });
 
         const paperBtn = document.querySelector('.paper');
@@ -37,6 +58,10 @@
             let computerSelection = computerPlay();
             paragraph.textContent =  playRound(playerSelection, computerSelection);
             div.appendChild(paragraph);
+            newPlayerScore.textContent = `${playerCount}`;
+            newCpuScore.textContent = `${cpuCount}`;
+            playerScore.appendChild(newPlayerScore);
+            cpuScore.appendChild(newCpuScore);
         });
 
         const scissorsBtn = document.querySelector('.scissors');
@@ -45,8 +70,21 @@
             let computerSelection = computerPlay();
             paragraph.textContent =  playRound(playerSelection, computerSelection);
             div.appendChild(paragraph);
+            newPlayerScore.textContent = `${playerCount}`;
+            newCpuScore.textContent = `${cpuCount}`;
+            playerScore.appendChild(newPlayerScore);
+            cpuScore.appendChild(newCpuScore);
         });
 
+        
+
+
+
+        //JS for Playing RPS
+
+        //global variables
+        let playerCount = 0;
+        let cpuCount = 0;
         
 
         function computerPlay() {
@@ -71,8 +109,10 @@
                     if (computerSelection == "rock") {
                         return "Tie!"
                     } else if (computerSelection == "paper") {
+                        cpuCount++;
                         return "You lose! Paper beats Rock"
                     } else if (computerSelection == "scissors") {
+                        playerCount++;
                         return "You Win! Rock beats Scissors"
                     }
                     break;
@@ -80,8 +120,10 @@
                     if (computerSelection == "paper") {
                         return " Tie!"
                     } else if (computerSelection == "scissors") {
+                        cpuCount++;
                         return "You Lose ! Scissors beats Paper"
                     } else if (computerSelection == "rock") {
+                        playerCount++;
                         return "You Win! Paper beats Rock"
                     }
                     break;
@@ -89,8 +131,10 @@
                     if (computerSelection == "scissors") {
                         return "Tie!"
                     } else if (computerSelection == "rock") {
+                        cpuCount++;
                         return "You Lose! Rock beats scissors"
                     } else if (computerSelection == "paper") {
+                        playerCount++;
                         return "You Win! Scissors beats Paper"
                     }
                     break;

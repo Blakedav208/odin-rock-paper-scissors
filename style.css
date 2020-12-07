@@ -2,3 +2,16 @@
     position: absolute;
     top: 300px;
 }
+
+.displayResults{
+    width: 100%;
+}
+
+.playerDisplay{
+    width: 600px;
+    float: left;
+}
+
+.cpuDisplay{
+    margin-left: 620px;
+}
