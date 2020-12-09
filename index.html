@@ -1,165 +1,139 @@
 <!DOCTYPE html>
 <html>
-
-<head>
+  <head>
     <title>Rock Paper Scissors</title>
-    <link rel="stylesheet" href="style.css">
-</head>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-<body>
-    <div class= "playerChoice">
-        <button class= "rock">ROCK</button>
-        <button class= "paper">PAPER</button>
-        <button class= "scissors">SCISSORS</button>
+  <body>
+    <div class="playerChoice">
+      <button class="rock">ROCK</button>
+      <button class="paper">PAPER</button>
+      <button class="scissors">SCISSORS</button>
     </div>
 
-    <div class= "displayResults">
-        <h1>Results</h1>
-        <div class = "playerDisplay">
-            <h3>Player</h3>
-            <p class= "playerScore"></p>
-        </div>
-        
-        <div class= "cpuDisplay">
-            <h3>CPU</h3>
-            <p class= "cpuScore"></p>
-        </div>
-        
+    <div class="displayResults">
+      <h1>Results</h1>
+      <div class="playerDisplay">
+        <h3>Player</h3>
+        <p class="playerScore"></p>
+      </div>
 
-        
-        
+      <div class="cpuDisplay">
+        <h3>CPU</h3>
+        <p class="cpuScore"></p>
+      </div>
     </div>
 
     <script>
-        //JS for changing the DOM
-        const div = document.querySelector('.playerChoice');
-        const paragraph = document.createElement('p');
-        const playerScore = document.querySelector('.playerScore');
-        const cpuScore = document.querySelector('.cpuScore');
-        const newPlayerScore = document.createElement('p');
-        const newCpuScore = document.createElement('p');
-        
-        const rockBtn = document.querySelector('.rock');
-        rockBtn.addEventListener('click', (e) => {
-            let playerSelection = "rock"
-            let computerSelection = computerPlay();
-            paragraph.textContent =  playRound(playerSelection, computerSelection);
-            div.appendChild(paragraph);
-            newPlayerScore.textContent = `${playerCount}`;
-            newCpuScore.textContent = `${cpuCount}`;
-            playerScore.appendChild(newPlayerScore);
-            cpuScore.appendChild(newCpuScore);
-            
+      //JS for changing the DOM
+      const div = document.querySelector(".playerChoice");
+      const paragraph = document.createElement("p");
+      const playerScore = document.querySelector(".playerScore");
+      const cpuScore = document.querySelector(".cpuScore");
+
+      const newPlayerScore = document.createElement("p");
+      const newCpuScore = document.createElement("p");
+
+      let buttons = document.querySelectorAll("button");
+      for (let i = 0; i < buttons.length; i++) {
+        buttons[i].addEventListener("click", (e) => {
+          playButton(buttons[i].classList.item(0));
         });
+      }
 
-        const paperBtn = document.querySelector('.paper');
-        paperBtn.addEventListener('click', (e) => {
-            let playerSelection = "paper"
-            let computerSelection = computerPlay();
-            paragraph.textContent =  playRound(playerSelection, computerSelection);
-            div.appendChild(paragraph);
-            newPlayerScore.textContent = `${playerCount}`;
-            newCpuScore.textContent = `${cpuCount}`;
-            playerScore.appendChild(newPlayerScore);
-            cpuScore.appendChild(newCpuScore);
-        });
+      function checkWinner() {
+        if (cpuCount == 5 || playerCount == 5) {
+          const winner = document.createElement("p");
+          winner.textContent = "Hello";
+          div.appendChild(winner);
+        } //end of conditional
+      }
 
-        const scissorsBtn = document.querySelector('.scissors');
-        scissorsBtn.addEventListener('click', (e) => {
-            let playerSelection = "scissors"
-            let computerSelection = computerPlay();
-            paragraph.textContent =  playRound(playerSelection, computerSelection);
-            div.appendChild(paragraph);
-            newPlayerScore.textContent = `${playerCount}`;
-            newCpuScore.textContent = `${cpuCount}`;
-            playerScore.appendChild(newPlayerScore);
-            cpuScore.appendChild(newCpuScore);
-        });
+      function playButton(string) {
+        let playerSelection = string;
+        let computerSelection = computerPlay();
+        paragraph.textContent = playRound(playerSelection, computerSelection);
+        div.appendChild(paragraph);
+        newPlayerScore.textContent = `${playerCount}`;
+        newCpuScore.textContent = `${cpuCount}`;
+        playerScore.appendChild(newPlayerScore);
+        cpuScore.appendChild(newCpuScore);
+        checkWinner();
+      }
 
-        
+      //JS for Playing RPS
 
+      //global variables
+      let playerCount = 0;
+      let cpuCount = 0;
 
+      function computerPlay() {
+        let random = Math.floor(Math.random() * Math.floor(3));
+        switch (random) {
+          case 0:
+            return "rock";
+            break;
+          case 1:
+            return "paper";
+            break;
+          case 2:
+            return "scissors";
+            break;
+        }
+      } //end of computerPlay
 
-        //JS for Playing RPS
-
-        //global variables
-        let playerCount = 0;
-        let cpuCount = 0;
-        
-
-        function computerPlay() {
-            let random = Math.floor(Math.random() * Math.floor(3));
-            switch (random) {
-                case 0:
-                    return "rock"
-                    break;
-                case 1:
-                    return "paper"
-                    break;
-                case 2:
-                    return "scissors"
-                    break;
+      function playRound(playerSelection, computerSelection) {
+        switch (playerSelection) {
+          case "rock":
+            if (computerSelection == "rock") {
+              return "Tie!";
+            } else if (computerSelection == "paper") {
+              cpuCount++;
+              return "You lose! Paper beats Rock";
+            } else if (computerSelection == "scissors") {
+              playerCount++;
+              return "You Win! Rock beats Scissors";
             }
-
-        }//end of computerPlay
-
-        function playRound(playerSelection, computerSelection) {
-            switch (playerSelection) {
-                case "rock":
-                    if (computerSelection == "rock") {
-                        return "Tie!"
-                    } else if (computerSelection == "paper") {
-                        cpuCount++;
-                        return "You lose! Paper beats Rock"
-                    } else if (computerSelection == "scissors") {
-                        playerCount++;
-                        return "You Win! Rock beats Scissors"
-                    }
-                    break;
-                case "paper":
-                    if (computerSelection == "paper") {
-                        return " Tie!"
-                    } else if (computerSelection == "scissors") {
-                        cpuCount++;
-                        return "You Lose ! Scissors beats Paper"
-                    } else if (computerSelection == "rock") {
-                        playerCount++;
-                        return "You Win! Paper beats Rock"
-                    }
-                    break;
-                case "scissors":
-                    if (computerSelection == "scissors") {
-                        return "Tie!"
-                    } else if (computerSelection == "rock") {
-                        cpuCount++;
-                        return "You Lose! Rock beats scissors"
-                    } else if (computerSelection == "paper") {
-                        playerCount++;
-                        return "You Win! Scissors beats Paper"
-                    }
-                    break;
-            }//end of switch statement
-
-        }//end of playRound
-
-        function game() {
-            const playerSelection = () => prompt("Rock, Paper, Scissors").toLowerCase();
-            const computerSelection = () => computerPlay();
-
-            for (let i = 0; i < 5; i++) {
-                //playerSelection();
-                //computerSelection();
-                console.log(playRound(playerSelection(), computerSelection()));
-
+            break;
+          case "paper":
+            if (computerSelection == "paper") {
+              return " Tie!";
+            } else if (computerSelection == "scissors") {
+              cpuCount++;
+              return "You Lose ! Scissors beats Paper";
+            } else if (computerSelection == "rock") {
+              playerCount++;
+              return "You Win! Paper beats Rock";
             }
-        }//end of game
+            break;
+          case "scissors":
+            if (computerSelection == "scissors") {
+              return "Tie!";
+            } else if (computerSelection == "rock") {
+              cpuCount++;
+              return "You Lose! Rock beats scissors";
+            } else if (computerSelection == "paper") {
+              playerCount++;
+              return "You Win! Scissors beats Paper";
+            }
+            break;
+        } //end of switch statement
+      } //end of playRound
 
-        
+      function game() {
+        const playerSelection = () =>
+          prompt("Rock, Paper, Scissors").toLowerCase();
+        const computerSelection = () => computerPlay();
 
-        //game();
+        for (let i = 0; i < 5; i++) {
+          //playerSelection();
+          //computerSelection();
+          console.log(playRound(playerSelection(), computerSelection()));
+        }
+      } //end of game
 
-
+      //game();
     </script>
-</body>
-
+  </body>
 </html>
