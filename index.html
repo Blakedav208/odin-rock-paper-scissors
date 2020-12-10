@@ -7,13 +7,13 @@
 
   <body>
     <div class="playerChoice">
-      <button class="rock">ROCK</button>
-      <button class="paper">PAPER</button>
-      <button class="scissors">SCISSORS</button>
+      <button class="rock"></button>
+      <button class="paper"></button>
+      <button class="scissors"></button>
     </div>
 
     <div class="displayResults">
-      <h1>Results</h1>
+      <h1>Rock Paper Scissors</h1>
       <div class="playerDisplay">
         <h3>Player</h3>
         <p class="playerScore"></p>
@@ -45,8 +45,14 @@
       function checkWinner() {
         if (cpuCount == 5 || playerCount == 5) {
           const winner = document.createElement("p");
-          winner.textContent = "Hello";
+          winner.classList.add('winStatement')
+          if(cpuCount == 5 ){
+            winner.textContent = "Computer Wins! You Lost 5 Times!";
           div.appendChild(winner);
+          }else if(playerCount ==5){
+            winner.textContent = "You Won 5 Times! Computer Loses!";
+          div.appendChild(winner);
+          }
         } //end of conditional
       }
 
